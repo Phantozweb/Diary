@@ -1,0 +1,79 @@
+const usersByDate = {}; // Declare the object first
+
+usersByDate['07/11/2003'] = { // Assign the full object structure
+    name: "Date:18.04.2025", // A placeholder name for this special entry
+    message: `# Dear classmates,
+
+Before you read this, please know that the content shared here is deeply personal. It reflects my true experiences and feelings during this time. If anything here causes any hurt or discomfort, I sincerely apologize. My intention is only to share my perspective with you all.
+
+Starting from the 3rd year, I won't be continuing this journey with you. These past two years have been incredibly memorable because of each and every one of you.
+
+The first year was good; much happier. The second year was different. So many misunderstandings happened, and I felt I couldn't be who I really am. Misjudgments made me feel separate. I decided to leave for my mental health. I hated being judged, even by those I thought were close.
+
+> I am going away with bittersweet memories. It’s hard to hold the best and the bitterest memories from the same people who affected my heart.
+
+Maybe I was unlucky in friendships. I feel I failed at friendship. I consider friends like family; when my actual family made me sad, friends made me laugh. But in college, I couldn't adapt as easily as I thought I would. I struggled to fit in and be myself, so I kept to myself more.
+
+My absence might not affect anyone because I tried to detach before leaving. I separated myself, avoided photos and events. If I get attached, I invest a lot, so I stopped trying to fix bonds not broken by me and didn’t try to build new ones. It’s not a drama, and I didn’t leave myself; blaming me doesn’t make it true. Hurting me when I wanted a bond or sharing sadness only to have it used against me – that’s why I stopped sharing and explaining.
+
+I was judged a lot, even when telling the truth, so I stopped explaining who I am and focused on myself. People judged my silence; even Vidhya sir mentioned it. But those with memories know that's not me. Nobody truly knows why I became so silent.
+
+A boy used to laugh because of Vidhya sir after 6 months of being home. When I came to college, I laughed again, but slowly the laugh faded as my surroundings changed. I still blame myself that I can't adapt like others do, so I preferred being alone. His jokes never made me laugh; not even a small smile came again.
+
+But what I do appreciate is the acceptance I found here that I never had in school. Despite the challenges, I’ve learned a lot from everyone, and I want to focus on the positive impacts as well.
+
+If I call someone who is truly my mentor, I call **Viji Mam**. She is the reason I started learning more and even did a research paper with her guidance that helped me connect with my family. Suddenly, my family members started caring for me and even bought me a tablet for my education, which had been on my bucket list since 8th standard. It all started with her motivation; she used to tell me about creating blogs. Later, I tried, but it didn’t work well. As she mentioned more case studies and research papers, one day, Viji Mam and I had a long conversation about her project, and she politely and clearly explained it to me. She is the reason I started to maintain my LinkedIn profile, and after her arrival, I changed more in my professional life, still holding her lessons in mind.
+
+I also need to mention our principal, **Samuel Vijay Sir**. I was the first admission of the 2023-2027 batch. Our first conversation was on mobile, and he talked with me about how I got into optometry. Actually, I had no idea! And here's a funny thing I still can't understand: my mom told me that when I was good at botany, I asked her to let me join BSc Agriculture. But she said, "You don't even know how to use a shovel; how can you do that?" (unaku mampati pudikave theryathu epdi nu ketanga). Then how did I get admission into optometry? To this day, I still don’t understand. (aprom epdi optometry la admission potanganu iniki varaikum purila?)
+
+Sam Sir is like a foundation for my project ideas. When I went to a conference in Chennai, he shared something when I asked. I told him, "Sir, I had an idea about photoreceptor regeneration using stem cells," but it was already an article, and I had no idea how to make it a research paper. He said, "Every research has limitations; you just have to do what you can within them." That seriously touched my curiosity to make a research paper.
+
+Later, I didn't even know where to post the paper, so I posted it on my website and LinkedIn. Only then did Viji Mam and Akila Mam notice and offer suggestions. They told me it wasn’t the right place and helped me refine it. They explained the word plagiarism and where I needed to remove it, and I worked on it. Finally, I had a more organized paper.
+
+Akila Mam mentioned in class that a junior boy had created a research paper in 3 years. Later, in my 3rd year, people started murmuring, “Is he the only one with brains?” when I went to drink water. But for me, it was like sleepless nights working on reading paper articles on a tiny screen, which caused severe dry eyes. It still causes discomfort, but it was worth it for the research paper I made. Their murmuring worried me a little, and I thought they would help me, but only my close ones from my 3rd year encouraged me: **Rithnika Akka**, **Gopika Akka**, and **Dharani Akka**. They even offered financial help to publish the paper.
+
+However, I rejected their offers and told them that I would take care of it myself. I asked my mom for the money, but she didn’t understand what a research paper was, so she didn’t give me any. Left with no other choice, I used my food money for that entire month to pay for the publication, and I had no money for food. **Mega** helped me by giving me the money, **Rekha** provided me with food, **Dharshini** offered food, and **Rithnika Akka** even brought me food. Thanks to their kindness, I somehow managed to get through that tough time.
+
+I remember sending the paper to international journals at 3:00 am, and after two weeks of review, my paper got selected! It scored 92% for creativity and more. I was shocked for two days.
+
+Afterward, my attention shifted to things I loved, like coding. I created a simple app for the downfall of hypermetropia, and **Sam Sir** was impressed. He even hugged me, and that made my day.
+
+This moment led me to a bigger achievement. My team won a trophy for our presentation at the World Optometry Day event. It was an incredible feeling to get the trophy from **Sam Sir**. It took me two years to receive that trophy, and I felt immense happiness when he said, *“Somehow, you finally got the cup.”*
+
+---
+
+## Two Posters, Two Milestones
+
+### 1. **Downfall of Hypermetropia** – My First Poster Presentation
+
+I made my first poster titled **“Downfall of Hypermetropia”** as a basic awareness project.  
+That day, something unexpected happened — **Sam Sir hugged me**.
+
+> *“That hug meant everything to me — it wasn’t just about the poster. It felt like validation after years of being overlooked.”*
+
+Even though it didn’t win a prize, it sparked something in me.
+
+---
+
+### 2. **AI in Optometry Learning** – My First and Last Trophy from Lotus
+
+My second poster, **“AI in Optometry Learning”**, was something I built with heart and mind.  
+From coding prototypes to crafting the idea — it was all mine.
+
+This time, it wasn’t just noticed… **it won the trophy**.
+
+> *“This became my **first and last trophy from Lotus** — a full-circle moment I’ll never forget.”*
+
+When **Sam Sir** handed me the cup, he smiled and said:
+
+> *“Somehow, you finally got the cup.”*
+
+---
+
+### Final Message
+
+I tried to give my message individually to each and every one of you, as much as possible. I think I could recall something from every single one of you that made a mark in my life. Thank you for being a part of my journey.
+
+To you all, I say goodbye with gratitude in my heart.
+`};
+

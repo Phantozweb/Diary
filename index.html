@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Diary</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts for handwritten style -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+
+    <!-- Import Map for Libraries -->
+    <script type="importmap">
+      {
+        "imports": {
+          "marked": "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js"
+        }
+      }
+    </script>
+
+    <script type="module" src="app.js" defer></script>
+    <!-- Load usersByDate data -->
+    <script src="usersByDate[07/11/2003].message"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Cover Page -->
+        <div id="app-cover" class="page active-page">
+            <div class="cover-content">
+                <h1>LIHSM 2023-2025</h1>
+                <p>A Virtual Diary</p>
+                <p class="tap-prompt">Tap to Open</p>
+            </div>
+        </div>
+
+        <!-- Diary View (Spine + Paper Area) -->
+        <!-- Add the 'hidden' class initially -->
+        <div id="diary-view" class="hidden">
+            <div class="diary-spine"></div>
+            <div class="paper-area">
+                <!-- Date Selection Page (Repurposed from Login) -->
+                <div id="date-selection-container" class="page diary-paper-style hidden">
+                    <div class="page-content">
+                        <!-- Updated Heading -->
+                        <h2>Enter Bday of Roll no 8!</h2>
+                        <p class="diary-intro-message">
+                            This diary requires a specific date (MM/DD) to unlock the entry.
+                        </p>
+                        <div class="login-form">
+                            <div class="date-inputs">
+                                <input type="text" id="birth-month" placeholder="MM" maxlength="2">
+                                <input type="text" id="birth-day" placeholder="DD" maxlength="2">
+                            </div>
+                            <button id="open-diary-btn">Unlock Entry</button>
+                            <p id="login-error" class="error-message hidden"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message App Page -->
+                <div id="message-app" class="page diary-paper-style hidden">
+                    <div class="container">
+                        <div class="content-header">
+                             <div id="user-info" style="font-weight:bold;color:var(--secondary-color)"></div>
+                        </div>
+                        <div class="message-interface">
+                            <!-- Message Display Area -->
+                            <div id="message-display">
+                                <!-- Student message or special message will be displayed here -->
+                                <!-- The reveal login button will be appended here by JS -->
+                            </div>
+                            <!-- The academic login form will be placed here -->
+                             <div id="academic-login" class="academic-login-container hidden">
+                                <div class="academic-form">
+                                    <h2>Student Login</h2>
+                                    <p>Enter your academic number and password.</p>
+                                    <input type="text" id="academic-number" placeholder="Academic Number">
+                                    <input type="password" id="academic-password" placeholder="Password">
+                                    <button id="academic-login-btn">Login</button>
+                                    <p id="academic-error" class="error-message hidden"></p>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

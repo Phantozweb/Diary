@@ -1,0 +1,816 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+:root {
+  --primary-color: #6b4e4c;
+  --secondary-color: #8c6e6b;
+  --accent-color: #a3b18a;
+  --light-bg: #d4b499;
+  --text-color: #333333;
+  --border-color: #c0a08c;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --diary-paper-color: #fff9e9;
+  --diary-line-color-valid: rgba(100, 80, 60, 0.3);
+  --binding-color: #4a3a2a;
+  --cover-color: #5a3e3c;
+  --spine-color: var(--binding-color);
+
+  /* Spine dimensions */
+  --spine-width-base: 50px;
+  --spine-width-md: 35px;
+  --spine-width-sm: 25px;
+
+  /* Padding for pages relative to spine/edge */
+  --page-padding-left-base: calc(var(--spine-width-base) / 2 + 20px);
+  --page-padding-left-md: calc(var(--spine-width-md) / 2 + 15px);
+  --page-padding-left-sm: calc(var(--spine-width-sm) / 2 + 10px);
+
+  /* General padding */
+  --padding-base: 40px;
+  --padding-md: 20px;
+  --padding-sm: 15px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--light-bg);
+}
+
+body {
+  font-family: 'Nanum Pen Script', 'Caveat', cursive;
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+}
+
+#app {
+    position: relative;
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: opacity 0.6s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.page.active-page {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#diary-view {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.diary-spine {
+    width: var(--spine-width-base);
+    background-color: var(--spine-color);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 3;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.paper-area {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.paper-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(var(--diary-line-color-valid) 1px, transparent 1px);
+    background-size: 100% 28px;
+    background-position: 0 5px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.diary-paper-style {
+    background-color: var(--diary-paper-color);
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.05), inset 10px 0 15px rgba(0, 0, 0, 0.1);
+    padding: var(--padding-sm) var(--padding-sm) var(--padding-sm) var(--page-padding-left-sm);
+    font-family: 'Caveat', cursive;
+    color: #222;
+    font-size: 1.4rem;
+    line-height: 2;
+    scrollbar-width: thin;
+    scrollbar-color: var(--binding-color) var(--diary-paper-color);
+    text-align: left;
+    flex-grow: 1;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.diary-paper-style::-webkit-scrollbar {
+   width: 8px;
+}
+
+.diary-paper-style::-webkit-scrollbar-track {
+   background: var(--diary-paper-color);
+}
+
+.diary-paper-style::-webkit-scrollbar-thumb {
+   background-color: var(--binding-color);
+   border-radius: 4px;
+   border: 2px solid var(--diary-paper-color);
+}
+
+.page-content {
+    position: relative;
+    z-index: 1;
+    max-width: 95%;
+    margin: 0 auto;
+    width: 100%;
+    flex-grow: 1;
+}
+
+#app-cover {
+    background-color: var(--cover-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.cover-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cover-content p {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cover-content .tap-prompt {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+#date-selection-container .page-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 100%;
+}
+
+#date-selection-container h2 {
+  margin-bottom: 15px;
+  color: var(--secondary-color);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2), 1px -1px 0 rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+}
+
+.diary-intro-message {
+     margin-left: auto;
+     margin-right: auto;
+     margin-bottom: 30px;
+     padding: 0 var(--padding-sm);
+     max-width: 90%;
+     text-align: left;
+}
+
+.login-form {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  width: 100%;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.date-inputs input {
+    flex-grow: 0;
+    width: auto;
+    text-align: center;
+}
+
+.date-inputs input:first-child { /* MM */
+    max-width: 60px;
+}
+
+.date-inputs input:nth-child(2) { /* DD */
+     max-width: 60px;
+}
+
+.login-form input {
+  display: block;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  background-color: var(--diary-paper-color);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+}
+
+.login-form input::placeholder {
+  font-family: 'Caveat', cursive;
+  color: rgba(34, 34, 34, 0.5);
+}
+
+button {
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.login-form button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 1.2rem;
+}
+
+.error-message {
+    color: #d63031;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+#message-app {
+     display: flex;
+     flex-direction: column;
+     min-height: 100%;
+}
+
+#message-app .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.message-interface {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+#message-display {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #222;
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 30px;
+  background-image: none !important;
+  padding-top: 5px;
+  text-indent: 1em;
+  scroll-behavior: smooth;
+}
+
+#message-display.hidden {
+    display: none !important;
+}
+
+#message-display::after {
+    display: none !important;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+#user-info {
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+}
+
+.diary-entry {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--diary-line-color-valid);
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.entry-name, .entry-date {
+  color: var(--secondary-color);
+}
+
+.entry-body {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+}
+
+.entry-body p {
+  margin-bottom: 0.5em;
+  text-indent: 1em;
+}
+
+.entry-body blockquote {
+  margin: 0.5em 10px;
+  padding-left: 0.5em;
+  font-size: 1.1rem;
+  border-left: 4px solid var(--accent-color);
+  color: #555;
+  font-style: italic;
+  background-color: rgba(163, 177, 138, 0.1);
+  border-radius: 4px;
+}
+
+.entry-body blockquote p {
+  margin-bottom: 0.5em;
+  text-indent: 0;
+}
+
+.entry-body ul,
+.entry-body ol {
+    margin: 0.5em 0 0.5em 1.5em;
+    padding: 0;
+}
+
+.entry-body li {
+    margin-bottom: 0.3em;
+    line-height: 1.5;
+}
+
+.entry-body img {
+    max-width: 98%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+    border: 1px solid var(--border-color);
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.entry-body h1, .entry-body h2, .entry-body h3,
+.entry-body h4, .entry-body h5, .entry-body h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--secondary-color);
+    font-family: 'Caveat', cursive;
+}
+
+.entry-body h1 { font-size: 1.8em; }
+.entry-body h2 { font-size: 1.6em; }
+.entry-body h3 { font-size: 1.4em; }
+.entry-body h4 { font-size: 1.2em; }
+.entry-body h5 { font-size: 1.1em; }
+.entry-body h6 { font-size: 1em; }
+
+.entry-body strong {
+  font-weight: bold;
+  font-family: 'Caveat', cursive;
+}
+
+.entry-body em {
+  font-style: italic;
+  font-family: 'Caveat', cursive;
+}
+
+.entry-body hr {
+    margin: 2em 0;
+    border: none;
+    height: 1px;
+    background: var(--diary-line-color-valid);
+    position: relative;
+}
+
+.entry-body hr::before {
+    content: '•';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--diary-paper-color);
+    padding: 0 10px;
+    color: var(--secondary-color);
+}
+
+.spotify-embed {
+    display: none;
+}
+
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 50px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.message-footer {
+    display: none;
+}
+
+#academic-login {
+    margin-top: 15px;
+    background-color: rgba(212, 180, 153, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+#academic-login.hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+#academic-login .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.academic-form input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+.academic-form button {
+    margin-top: 10px;
+}
+
+#goodbye-message {
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    color: var(--secondary-color);
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Gloria Hallelujah', cursive;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+#goodbye-message.hidden {
+    display: none;
+    opacity: 0;
+}
+
+#goodbye-message:not(.hidden) {
+    display: block;
+    opacity: 1;
+}
+
+#goodbye-message h1 {
+     font-size: 1em;
+     margin: 0;
+     padding: 0;
+     font-family: inherit;
+     color: inherit;
+     text-shadow: inherit;
+}
+
+.page-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--diary-line-color-valid);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    flex-shrink: 0;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin: 15px 0;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.reveal-login-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s;
+}
+
+.reveal-login-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.reveal-login-btn.hidden {
+    display: none;
+}
+
+.reveal-student-login-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s;
+    display: none;
+}
+
+.reveal-student-login-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.student-login-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 20px;
+}
+
+.student-login-popup.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.student-login-popup-content {
+    background-color: var(--diary-paper-color);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.student-login-popup.active .student-login-popup-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.student-login-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10;
+}
+
+.student-login-popup-close:hover {
+    color: var(--primary-color);
+}
+
+.academic-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.academic-form h2 {
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.academic-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.academic-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.academic-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.message-status-display {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#popup-check-message-status-btn {
+    margin-top: 10px;
+    background-color: var(--accent-color);
+}
+
+#popup-check-message-status-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+@media (max-width: 480px) {
+    .student-login-popup-content {
+        width: 95%;
+        padding: 20px;
+        max-height: 90vh;
+    }
+
+    .academic-form {
+        gap: 10px;
+    }
+
+    .academic-form h2 {
+        font-size: 1.5rem;
+    }
+
+    .academic-form input {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .academic-form button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --spine-width-base: var(--spine-width-md);
+        --page-padding-left-base: var(--page-padding-left-md);
+        --padding-base: var(--padding-md);
+    }
+
+    .cover-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .cover-content p {
+        font-size: 1.5rem;
+    }
+
+    #date-selection-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .diary-intro-message {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        text-align: left;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .login-form input {
+        font-size: 1rem;
+    }
+
+    #message-display {
+        font-size: 1.1rem;
+        line-height: 22px;
+        padding: 5px;
+        padding-bottom: 150px; 
+    }
+
+    .entry-body {
+        font-size: 1.1rem;
+    }
+
+    .entry-body p {
+        margin-bottom: 0.3em;
+    }
+
+    .entry-body blockquote {
+        margin: 0.3em 5px;
+        font-size: 1rem;
+    }
+
+    .message-footer {
+        position: relative;
+    }
+}
